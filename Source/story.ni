@@ -1,5 +1,17 @@
 "A travers la forêt" by Julien Frison
 
+[ Copyright (C) 2013  Julien Frison
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>. ]
+Include GNU General Public License v3 by Free Software Foundation. [extension modifié: blorb bug si "Release along with the source text" demandé dans une extension]
+[The COPYING file included is true. ]
+Release along with the source text. 
+
+
 Include French by Eric Forgeot.
 Use French Language.
 
@@ -45,6 +57,8 @@ gwann : mort/disparu
 nîd : mouillé/humide/larmoyant
 naug ( et variations) : Nain
 morn : noir/sombre
+fëa: esprit
+hröa: corps
 
 Nom utilisés en inventant:
 
@@ -53,7 +67,9 @@ collines de Silbermold
 ville de Faassin (haut-seigneur puissant, sans sang royal, riche grâce charbon de tréant)
 ville de Daeghel
 buisson de Dalrin (avec fleurs)
+Tha'daril: roi (père du prince)
 
+Cavernes de Mandos -> là où sont envoyé les esprits elfes tués
 ]
 
 Part 0 - Définitions
@@ -267,6 +283,22 @@ To decide whether peut observer les animaux:
 	if observation est connue or communication animale est connue, yes;
 	otherwise no.
 
+A dieu is a kind of object. The plural of dieu is dieux. 
+Some dieux are defined by the Table of Vénération des Dieux.
+[ rituels druidiques, et potentiellement certains artefacts, donneront un bonus à la relation, ce n'est ici qu'un chiffre brut ]
+[ un dieu majeur sera choisi à la création du personnage ]
+
+Table of Vénération des Dieux
+dieu	majeur	vénération	attribution	capa-prim	description
+Mornlim	1	100	"Dieu de l'équilibre et des cycles naturels"	"chasse"	"Chrondirn a la responsabilité d'oeuvrer à l'équilibre des forces créatrices et destructrices afin de permettre un bon enchaînement des cycles naturels. Naturellement tourné vers l'harmonie, ce dieu n'en a pas moins ses côtés sombres."
+Faethirith	0	0	"Dieu de la prévoyance et du devoir"	"observation"	"Faethirith..."
+Galathil	0	0	"Déesse de la dissimulation"	"camouflage"	"Epouse de Faethirith, Galathil est une spécialiste de la dissimulation. De [italic type]toutes[roman type] les dissimulations."
+
+[TODO: terminer cette listes des dieux + essayer d'automatiser au moins les vénérations + neutralisation de capacités si -100]
+
+To dégrader relation avec a dieu:
+	do nothing.
+
 points d'équipement utilisés is a number which varies. The points d'équipement utilisés is 40. [arc+épée par défaut]
 
 To decide which number is points d'équipement maximum:
@@ -321,6 +353,7 @@ To decide which poids is the poids porté:
 Definition: a thing is available if it is not enclosed by the player. 
 
 A person has a number called points de vie. The points de vie is usually 100. 
+Definition: a person is mort if its points de vie <= 0.
 
 A person has a number called bonus d'attaque. [fait pour les PNJ, doit équivaloir au bonus de qualité d'équipement sans avoir à préciser l'équipement, ou à des bonus situationnels. ]
 A person has a number called bonus de défense. 
@@ -610,12 +643,66 @@ Instead of taking or touching rainette écarlate :
 		now the rainette écarlate is off-stage;
 	otherwise :
 		say "Ceci est un bug ! ".
-[ Je dois trouver un moyen de permettre à un joueur qui a déjà compris le truc de ne pas avoir besoin que la compétence le lui donne... par un verbe facile à deviner ! ]
+[ TODO: Je dois trouver un moyen de permettre à un joueur qui a déjà compris le truc de ne pas avoir besoin que la compétence le lui donne... par un verbe facile à deviner ! ]
 [Taking with is an action applying to two things and requiring a carried second noun.
 Understand "take [something] with [something]" as taking with;
 Instead of taking rainette écarlate with ;
 Instead of rubbing rainette écarlate with something :]
-	
+
+Clairière lumineuse is a Partie de la forêt. It is northwest of Sentier innondé. The description is "Une large clairière perce la forêt, cernée par d'immenses arbres reprenant alors brusquement possession de la forêt. Du haut des cîmes de ces arbres centenaires, quelques rayons de soleil chutent verticalement sur la clairière et illuminent l'herbe dense, non sans avoir au passage fait briller les courants de poussière qui virevoltent le long de ce puit de lumière. Vous vous arrêtez quelques temps pour profiter de la chaleur envoûtante du soleil sur votre peau, baigné dans le chant relaxant des grillons.". 
+The grillons is an animal in Clairière lumineuse. It is scenery. It is plural-named. The description is "Les grillons sautillent ça et là hors de l'herbe, trop rapidement pour que vous puissez vraiment les examiner.".
+Instead of listening when in Clairière lumineuse:
+	say "Rien mis à part le son envahissant des grillons.".
+Instead of listening to grillons:
+	say "Certains humains trouvent le chant des grillons agaçant. Quoi de plus relaxant pourtant?".
+Instead of taking grillons:
+	say "Impossible d'attraper ces bestioles qui sautent dans tous les sens dès que votre main s'en approche à peine.".
+
+Ruisseau rocailleux is a Partie de la forêt. It is north of Clairière lumineuse. The description is "Un petit ruisseau se faufile à travers les rochers, qu'il fouette et éclabousse. Probablement un affluent de la rivière jaune, un peu plus au nord. Sur ses rives agitées s'agite une masse de roseaux dorés. Certains portent des traces de piétinement, par des animaux. C'est sans doute un endroit de choix pour tous ceux  qui aux alentours souhaitent se désaltérer.".
+The roseaux dorés is in Ruisseau rocailleux. It is undescribed. It is plural-named. 
+The ours sylvestre is an animal. The ours sylvestre can be dans le coin, ici or parti. It is dans le coin. 
+To apparition d'un ours:
+	if Ours sylvestre is dans le coin:
+		say "Un ours surgit soudain de la dense végétation. [if camouflage est connue]Immédiatement, vous vous allongez et vous camouflez dans les herbes hautes, tandis que l'ours boit paisiblement l'eau du ruisseau.[otherwise]Il ne semble pas encore vous avoir vu, mais sans doute serait-il prudent de dégarpir rapidement[end if]";
+		now Ours sylvestre is ici;
+		move Ours sylvestre to ruisseau rocailleux;
+		The ours attaque peut-être in one turn from now;
+		The ours s'en va in two turns from now.
+At the time when the ours attaque peut-être:
+	unless camouflage est connue or communication animale est connue or Ours sylvestre is mort or the player is not in the location of Ours sylvestre:
+		say "Sa soif satisfaite, l'ours relève la tête. C'est alors qu'il vous remarque, ceci le mettant de fort mauvaise humeur. L'animal est trop rapide pour que vous puissiez espérer fuir, il va falloir se défendre.";
+		combattre l'ours.
+At the time when the ours s'en va:
+	if Ours sylvestre is not mort and Ours sylvestre is ici:
+		say "N'ayant plus rien à faire par ici, l'ours finit par s'enfoncer de nouveau dans la forêt, et disparaît aussi vite qu'il est apparu.";
+		now the Ours sylvestre is parti;
+		now the Ours sylvestre is off-stage.
+Instead of examining Ours sylvestre when Ours sylvestre is not mort and communication animale est connue:
+	say "Ce vieil ours de demande qu'à être laissé en paix. Il n'attaquera que s'il sent en vous une menace.".
+To combattre l'ours:
+	résoudre combat contre ours sylvestre;
+	now the printed name of Ours sylvestre is "carcasse d'ours sylvestre";
+	now Ours sylvestre is female.  
+Instead of attacking Ours sylvestre:
+	if chasse est connue and player encloses at least one arc :
+		say "Pendant que l'ours  boit tranquillement l'eau du ruisseau sans suspecter quoi que ce soit, vous prenez le temps d'ajuster votre arc et visez le cou de l'animal. A l'instant où la flèche sifflante atteint sa cible, une puissante plainte déchire. Mais il en faut plus pour arrêter le robuste animal qui fonce désormais sur vous furieux.";
+		now points de vie of ours sylvestre is 30; 
+		combattre l'ours;
+	otherwise:
+		say "A peine dégainez-vous votre arme que l'ours émet un puissant grognement et s[']élance vers vous.";
+		combattre l'ours.  
+Understand "carcasse" as Ours sylvestre when points de vie of Ours sylvestre <= 0.
+The eau du ruisseau is in ruisseau rocailleux. It is scenery. It is female. The description is "L'eau claire, purifiée par son bouillonnement permanent, semble parfaitement potable.".
+Understand "eau" as eau du ruisseau. 
+Instead of drinking eau du ruisseau when in Ruisseau rocailleux:
+	say "Vous vous penchez à genoux et goutez l'eau fraîche du ruisseau.";
+	apparition d'un ours.
+After waiting when in Ruisseau rocailleux:
+	apparition d'un ours.
+Instead of searching Ours sylvestre when Ours sylvestre is mort:
+	say "FIXME: trouver viande & med.".
+
+Grotte druidique is a Partie de la forêt. It is northeast of Ruisseau rocailleux and west of Sirsennas. 
 
 Section 3 - Tout droit après la bifurcation
 
@@ -828,16 +915,16 @@ To say (way - a direction) spacing:
 
 Table of Various Directions
 chosen way	abbrev	spacing
-up	"U   "	"    "
-northwest	"NW"	"  "
+up	"H   "	"    "
+northwest	"NO"	"  "
 north	" N "	"    "
 northeast	"NE"	"  "
 east	" E"	"  "
-west	"W "	"  "
+west	"O "	"  "
 southeast	"SE"	"  "
 south	" S "	"   "
-southwest	"SW"	"  "
-down	"D   "	"    "
+southwest	"SO"	"  "
+down	"B   "	"    "
 
 To say top rose:
 	say "[rose up][rose northwest][rose north][rose northeast]".
